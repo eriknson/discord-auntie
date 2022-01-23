@@ -39,7 +39,7 @@ const start = async () => {
       msg.react('☕')
     }
     if (
-      msg.channelId === process.env.CRON_CHANNEL &&
+      msg.channelId === process.env.CRON_CHANNEL_ID &&
       msg.author.id == process.env.BOT_ID
     ) {
       // Initialize bullish / bearish reactions
@@ -61,8 +61,8 @@ const start = async () => {
     }
   })
 
-  if (typeof process.env.CRON_CHANNEL === 'string') {
-    const channel = await client.channels.cache.get(process.env.CRON_CHANNEL)
+  if (typeof process.env.CRON_CHANNEL_ID === 'string') {
+    const channel = await client.channels.cache.get(process.env.CRON_CHANNEL_ID)
     const job = new CronJob(
       '1 * * * * *',
       async () => {
@@ -83,7 +83,7 @@ const start = async () => {
 
     job.start()
   } else {
-    console.error('Missing typeof process.env.CRON_CHANNEL')
+    console.error('Missing typeof process.env.CRON_CHANNEL_ID')
   }
 }
 
